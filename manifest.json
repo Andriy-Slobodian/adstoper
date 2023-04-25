@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Stop Ads",
+  "description": "That's a simple Google Chrome Extension for blocking ads",
+  "version": "0.0.1",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "default-icon.png"
+  }
+}
