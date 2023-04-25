@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: "./src/index.js",
@@ -12,19 +13,44 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)$/i,
                 exclude: /node_modules/,
                 use: ["babel-loader"],
             },
             {
-                test: /\.(ts|tsx)$/,
+                test: /\.(ts|tsx)$/i,
                 exclude: /node_modules/,
                 loader: "ts-loader"
-            }
+            },
+            /*{
+                test: /\.css$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ],
+                exclude: /\.module\.css$/,
+            },*/
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: "css-modules-typescript-loader"},
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: {
+                                localIdentName:'[name]__[local]--[hash:base64:5]',
+                            },
+                        },
+                    },
+                ],
+                // include: /\.module\.css$/,
+            },
         ],
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+        extensions: ["*", ".js", ".jsx", ".ts", ".tsx", ".css"],
     },
 
     plugins: [
@@ -33,9 +59,11 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'static' }
+                { from: 'static' },
+                { from: 'public/default.css' },
             ]
         }),
+        new MiniCssExtractPlugin(),
     ],
     devServer: {
         static: {
