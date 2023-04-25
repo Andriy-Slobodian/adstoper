@@ -70,5 +70,7 @@ module.exports = {
             directory: path.join(__dirname, "build"),
         },
         port: 3000,
+        liveReload: true, // watch for changes in the content base directory
+        open: true, // open the default browser when webpack starts
     }
 };
