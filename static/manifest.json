@@ -1,10 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Stop Ads",
-  "description": "That's a simple Google Chrome Extension for blocking ads",
+  "description": "Невпинно, нещадно і безжалісно блокує рекламу на сторінці, збільшує швидкість загрузки та економить ваші мегабайти.",
   "version": "0.0.1",
   "action": {
     "default_popup": "index.html",
-    "default_icon": "icon.png"
+    "default_icon": "images/icon-128.png"
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-64.png",
+    "128": "images/icon-128.png"
   }
 }
