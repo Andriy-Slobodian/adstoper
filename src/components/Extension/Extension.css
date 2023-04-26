@@ -1,7 +1,7 @@
 .container {
     width: 300px;
     height: auto;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     border: 1px solid #ccc;
     font-family: "Helvetica Neue, Verdana, Arial", sans-serif;
     line-height: 20px;

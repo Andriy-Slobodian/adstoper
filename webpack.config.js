@@ -22,14 +22,6 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "ts-loader"
             },
-            /*{
-                test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ],
-                exclude: /\.module\.css$/,
-            },*/
             {
                 test: /\.css$/,
                 use: [
@@ -44,12 +36,11 @@ module.exports = {
                         },
                     },
                 ],
-                // include: /\.module\.css$/,
             },
         ],
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx", ".ts", ".tsx", ".css"],
+        extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
     },
 
     plugins: [
