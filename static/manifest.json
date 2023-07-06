@@ -27,6 +27,8 @@
     }]
   },
   "permissions": [
+    "tabs",
+    "activeTab",
     "webRequest",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback"

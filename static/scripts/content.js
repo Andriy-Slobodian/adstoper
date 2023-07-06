@@ -16,7 +16,7 @@ window.onload = () => {
 
     // Send a message to the background script
     if (host) {
-        chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
+        chrome.tabs?.query({ active: true, currentWindow: true }, async (tabs) => {
             await chrome.runtime.sendMessage({ host: modifiedHost })
                 .then(response => {
                     // Handle the response from the background script

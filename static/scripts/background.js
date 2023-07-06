@@ -4,7 +4,7 @@ let activeTabId = 0;
 // Get Host & TabID from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     host = message.host;
-    activeTabId = sender?.tab?.id || 0;
+    activeTabId = sender.tab?.id || 0;
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
@@ -12,7 +12,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         const requestedOrigin = details?.url || '';
 
         // Get requests to different origin
-        if (host && requestedOrigin && activeTabId && !requestedOrigin.includes(host)) {
+        if (host && requestedOrigin && !requestedOrigin.includes(host)) {
 
             console.log('URL: ', details.url);
             console.log(`Modified: |${new URL(details.url).origin}`);
@@ -31,7 +31,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                             ]
                         },
                     },
-                    /*{
+                    {
                         id: 2,
                         priority: 2,
                         action: { type: "block" },
@@ -40,10 +40,21 @@ chrome.webRequest.onBeforeRequest.addListener(
                             excludedInitiatorDomains: [`${host}`],
                             excludedRequestDomains: [`${host}`],
                             resourceTypes: [
-                                "main_frame"
+                                "main_frame",
+                                "stylesheet",
+                                "script",
+                                "image",
+                                "font",
+                                "object",
+                                "xmlhttprequest",
+                                "ping",
+                                "csp_report",
+                                "media",
+                                "websocket",
+                                "other"
                             ]
                         },
-                    }*/
+                    }
                 ],
                 removeRuleIds: [1, 2]
             });
