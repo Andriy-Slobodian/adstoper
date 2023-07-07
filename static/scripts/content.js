@@ -2,16 +2,46 @@ window.onload = () => {
     const { host } = location;
     const modifiedHost = host.replace('www.', '');
 
-    // Remove Ads from YouTube
+    // YouTube related logic
     if (host.includes('youtube')) {
-        setInterval(() => {
-            // Remove ads section near the video
-            document.getElementById('fulfilled-layout')?.remove();
-            document.querySelector('#companion')?.remove();
+        (() => {
+            const timeout = setInterval(() => {
+                // Remove Ad section One near the video
+                const adSectionOne = document.getElementById('fulfilled-layout');
+                if (adSectionOne) {
+                    adSectionOne.remove();
+                    console.log('EXTENSION => Ad section 1 was removed ....');
+                }
 
-            // Skip ads over the video
-            document.querySelector('.ytp-ad-skip-button')?.click();
-        }, 400);
+                // Remove Ad section Two near the video
+                const adSectionTwo = document.getElementById('companion');
+                if (adSectionTwo) {
+                    adSectionTwo.remove();
+                    console.log('EXTENSION => Ad section 2 was removed ....');
+                }
+
+                // Press "Skip ad" button over the video
+                const skipAdButton = document.querySelector('.ytp-ad-skip-button');
+                if (skipAdButton) {
+                    skipAdButton.click();
+                    console.log('EXTENSION => "Skip Ad" button was clicked');
+                }
+
+                // Skipp Ads video
+                const ad = document.querySelector('.ad-showing');
+                if (ad) {
+                    const video = document.querySelector('video');
+                    if (video) {
+                        video.currentTime = video.duration;
+                        console.log('EXTENSION => Ad skipped');
+                    }
+                }
+            }, 400);
+
+            return function () {
+                clearTimeout(timeout);
+            };
+        })();
     }
 
     // Send a message to the background script

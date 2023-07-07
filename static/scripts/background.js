@@ -23,6 +23,39 @@ chrome.webRequest.onBeforeRequest.addListener(
                     {
                         id: 1,
                         priority: 1,
+                        action: { type: "block" },
+                        condition: {
+                            urlFilter: `*`,
+                            initiatorDomains: [`${requestedOrigin}`],
+                            excludedInitiatorDomains: [`${host}`],
+                            excludedRequestDomains: [`${host}`],
+                            resourceTypes: [
+                                "main_frame",
+                                "sub_frame",
+                                "stylesheet",
+                                "script",
+                                "image",
+                                "font",
+                                "object",
+                                "xmlhttprequest",
+                                "ping",
+                                "csp_report",
+                                "media",
+                                "websocket",
+                                "other"
+                            ]
+                        },
+                    }
+                ],
+                removeRuleIds: [1]
+            });
+
+            /*
+            void chrome.declarativeNetRequest.updateDynamicRules({
+                addRules: [
+                    {
+                        id: 1,
+                        priority: 1,
                         action: { type: "allow" },
                         condition: {
                             urlFilter: `*${host}*`,
@@ -58,6 +91,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 ],
                 removeRuleIds: [1, 2]
             });
+             */
 
             // Cancel request listener
             return { cancel: true };
