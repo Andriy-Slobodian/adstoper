@@ -59,7 +59,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 removeRuleIds: [1, 2]
             });
 
-            // Associate the AbortController's signal with the request
+            // Cancel request listener
             return { cancel: true };
         }
     },

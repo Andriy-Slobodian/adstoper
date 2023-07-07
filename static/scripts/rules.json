@@ -5,6 +5,9 @@
     "action": { "type": "block" },
     "condition": {
       "urlFilter": "*",
+      "excludedInitiatorDomains": [
+        "youtube.com"
+      ],
       "resourceTypes": [
         "sub_frame"
       ]
