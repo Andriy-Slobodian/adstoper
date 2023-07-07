@@ -29,69 +29,12 @@ chrome.webRequest.onBeforeRequest.addListener(
                             initiatorDomains: [`${requestedOrigin}`],
                             excludedInitiatorDomains: [`${host}`],
                             excludedRequestDomains: [`${host}`],
-                            resourceTypes: [
-                                "main_frame",
-                                "sub_frame",
-                                "stylesheet",
-                                "script",
-                                "image",
-                                "font",
-                                "object",
-                                "xmlhttprequest",
-                                "ping",
-                                "csp_report",
-                                "media",
-                                "websocket",
-                                "other"
-                            ]
+                            resourceTypes: [ "main_frame" ]
                         },
                     }
                 ],
                 removeRuleIds: [1]
             });
-
-            /*
-            void chrome.declarativeNetRequest.updateDynamicRules({
-                addRules: [
-                    {
-                        id: 1,
-                        priority: 1,
-                        action: { type: "allow" },
-                        condition: {
-                            urlFilter: `*${host}*`,
-                            resourceTypes: [
-                                "main_frame"
-                            ]
-                        },
-                    },
-                    {
-                        id: 2,
-                        priority: 2,
-                        action: { type: "block" },
-                        condition: {
-                            urlFilter: `*`,
-                            excludedInitiatorDomains: [`${host}`],
-                            excludedRequestDomains: [`${host}`],
-                            resourceTypes: [
-                                "main_frame",
-                                "stylesheet",
-                                "script",
-                                "image",
-                                "font",
-                                "object",
-                                "xmlhttprequest",
-                                "ping",
-                                "csp_report",
-                                "media",
-                                "websocket",
-                                "other"
-                            ]
-                        },
-                    }
-                ],
-                removeRuleIds: [1, 2]
-            });
-             */
 
             // Cancel request listener
             return { cancel: true };
