@@ -36,7 +36,16 @@ window.onload = () => {
                         console.log('EXTENSION => Ad skipped');
                     }
                 }
-            }, 400);
+
+                const premiumModal = document.getElementById('main')
+                if (premiumModal) {
+                    const dismissButton = document.getElementById('dismiss-button')
+                    if (dismissButton) {
+                        dismissButton.click()
+                        console.log('EXTENSION => Premium Account request dismissed');
+                    }
+                }
+            }, 100);
 
             return function () {
                 clearTimeout(timeout);
