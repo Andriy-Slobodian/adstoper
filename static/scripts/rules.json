@@ -11,7 +11,9 @@
         "storybook.js.org",
         "codepen.io",
         "gov.ua",
-        "veggiesfarmgame.com"
+        "veggiesfarmgame.com",
+        "demio.loc",
+        "demio.com"
       ],
       "resourceTypes": [
         "sub_frame"
