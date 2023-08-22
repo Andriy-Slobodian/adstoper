@@ -13,7 +13,9 @@
         "gov.ua",
         "veggiesfarmgame.com",
         "demio.loc",
-        "demio.com"
+        "demio.com",
+        "stripe.com",
+        "stripecdn.com"
       ],
       "resourceTypes": [
         "sub_frame"
