@@ -57,6 +57,7 @@ window.onload = () => {
                 const newSkipButton = document.querySelector('.ytp-ad-skip-button-modern')
                 if (newSkipButton) {
                     newSkipButton.click()
+                    console.log('EXTENSION => New Skip button is pressed');
                 }
             }, 100);
 
