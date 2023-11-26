@@ -45,6 +45,19 @@ window.onload = () => {
                         console.log('EXTENSION => Premium Account request dismissed');
                     }
                 }
+
+                // Hide Selling Products button over the Video
+                const buttonOverTheVideo = document.querySelector('.ytp-suggested-action .ytp-suggested-action-badge-dismiss-button-icon')
+                if (buttonOverTheVideo) {
+                    buttonOverTheVideo.click()
+                }
+
+                // New Skip button
+                const newSkipButton = document.querySelector('.ytp-ad-skip-button-modern')
+                if (newSkipButton) {
+                    newSkipButton.click()
+                }
+
             }, 100);
 
             return function () {
