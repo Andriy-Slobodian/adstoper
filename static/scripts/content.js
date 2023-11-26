@@ -46,10 +46,11 @@ window.onload = () => {
                     }
                 }
 
-                // Hide Selling Products button over the Video
-                const buttonOverTheVideo = document.querySelector('.ytp-suggested-action .ytp-suggested-action-badge-dismiss-button-icon')
+                // Remove Selling Products button showing in front of the Video
+                const buttonOverTheVideo = document.querySelector('.ytp-suggested-action-badge')
                 if (buttonOverTheVideo) {
-                    buttonOverTheVideo.click()
+                    buttonOverTheVideo.remove()
+                    console.log('EXTENSION => Selling Products button is removed');
                 }
 
                 // New Skip button
@@ -57,7 +58,6 @@ window.onload = () => {
                 if (newSkipButton) {
                     newSkipButton.click()
                 }
-
             }, 100);
 
             return function () {
