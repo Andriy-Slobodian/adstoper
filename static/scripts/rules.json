@@ -15,7 +15,9 @@
         "demio.loc",
         "demio.com",
         "stripe.com",
-        "stripecdn.com"
+        "stripecdn.com",
+        "google.com",
+        "adobe.com"
       ],
       "resourceTypes": [
         "sub_frame"

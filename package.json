@@ -1,6 +1,6 @@
 {
   "name": "Stop-Ads",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Small Extension to block all Ads",
   "main": "src/index.js",
   "author": "Andriy Slobodian",
