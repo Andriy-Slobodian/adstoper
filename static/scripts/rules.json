@@ -17,7 +17,8 @@
         "stripe.com",
         "stripecdn.com",
         "google.com",
-        "adobe.com"
+        "adobe.com",
+        "jetbrains.com"
       ],
       "resourceTypes": [
         "sub_frame"
