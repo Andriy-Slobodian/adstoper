@@ -31,7 +31,7 @@ window.onload = () => {
                 const ad = document.querySelector('.ad-showing');
                 if (ad) {
                     const video = document.querySelector('video');
-                    if (video) {
+                    if (video && video.duration !== undefined) {
                         video.currentTime = video.duration;
                         console.log('EXTENSION => Ad skipped');
                     }
