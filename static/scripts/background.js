@@ -3,44 +3,44 @@ let activeTabId = 0;
 
 // Get Host & TabID from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    host = message.host;
-    activeTabId = sender.tab?.id || 0;
+  host = message.host;
+  activeTabId = sender.tab?.id || 0;
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
-    (details) => {
-        const requestedOrigin = details?.url || '';
+  (details) => {
+    const requestedOrigin = details?.url || '';
 
-        // Get requests to different origin
-        if (host && requestedOrigin && !requestedOrigin.includes(host)) {
+    // Get requests to different origin
+    if (host && requestedOrigin && !requestedOrigin.includes(host)) {
 
-            console.log('URL: ', details.url);
-            console.log(`Modified: |${new URL(details.url).origin}`);
-            console.log("--------------------------------");
+      console.log('URL: ', details.url);
+      console.log(`Modified: |${new URL(details.url).origin}`);
+      console.log("--------------------------------");
 
-            void chrome.declarativeNetRequest.updateDynamicRules({
-                addRules: [
-                    {
-                        id: 1,
-                        priority: 1,
-                        action: { type: "block" },
-                        condition: {
-                            urlFilter: `*`,
-                            initiatorDomains: [`${requestedOrigin}`],
-                            excludedInitiatorDomains: [`${host}`],
-                            excludedRequestDomains: [`${host}`],
-                            resourceTypes: [ "main_frame" ]
-                        },
-                    }
-                ],
-                removeRuleIds: [1]
-            });
+      void chrome.declarativeNetRequest.updateDynamicRules({
+        addRules: [
+          {
+            id: 1,
+            priority: 1,
+            action: { type: "block" },
+            condition: {
+              urlFilter: `*`,
+              initiatorDomains: [`${requestedOrigin}`],
+              excludedInitiatorDomains: [`${host}`],
+              excludedRequestDomains: [`${host}`],
+              resourceTypes: [ "main_frame" ]
+            },
+          }
+        ],
+        removeRuleIds: [1]
+      });
 
-            // Cancel request listener
-            return { cancel: true };
-        }
-    },
-    { urls: ["<all_urls>"] }
+      // Cancel request listener
+      return { cancel: true };
+    }
+  },
+  { urls: ["<all_urls>"] }
 );
 
 /*
