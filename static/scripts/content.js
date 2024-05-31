@@ -44,12 +44,15 @@ window.onload = () => {
           }
         }
 
-        const premiumModal = document.getElementById('main') || null;
-        if (premiumModal) {
-          const dismissButton = document.getElementById('dismiss-button') || null;
-          if (dismissButton) {
-            dismissButton.click()
-            console.log('EXTENSION => Premium Account request dismissed');
+        const dismissButton = document.getElementById('dismiss-button') || null;
+        if (dismissButton) {
+          dismissButton.click()
+          console.log('EXTENSION => Premium Account request dismissed');
+
+          const noThanksBtn = dismissButton.querySelector('[aria-label="Ні, дякую"]')
+          if (noThanksBtn) {
+            noThanksBtn.click()
+            console.log('EXTENSION => Premium Account Modal => "Ні, дякую"');
           }
         }
 
