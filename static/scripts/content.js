@@ -11,7 +11,7 @@ window.onload = () => {
         if (ticker) {
           ticker.style.display = 'none';
           ticker.remove()
-          console.log('EXTENSION => Ticker removed')
+          console.log('EXTENSION => remove() => Ticker')
         }
 
         // Remove Interstitial container
@@ -19,7 +19,7 @@ window.onload = () => {
         if (interstitial) {
           interstitial.style.display = 'none';
           interstitial.remove()
-          console.log('EXTENSION => Interstitial removed')
+          console.log('EXTENSION => remove() => Interstitial')
         }
 
         // Remove Alerts container
@@ -27,7 +27,7 @@ window.onload = () => {
         if (alerts) {
           alerts.style.display = 'none';
           alerts.remove()
-          console.log('EXTENSION => Alerts removed')
+          console.log('EXTENSION => remove() => Alerts')
         }
 
         // Remove Messages container
@@ -35,7 +35,7 @@ window.onload = () => {
         if (messages) {
           messages.style.display = 'none';
           messages.remove()
-          console.log('EXTENSION => Messages removed')
+          console.log('EXTENSION => remove() => Messages')
         }
 
         // Remove ClarifyBox container
@@ -43,7 +43,7 @@ window.onload = () => {
         if (clarifyBox) {
           clarifyBox.style.display = 'none';
           clarifyBox.remove()
-          console.log('EXTENSION => ClarifyBox removed')
+          console.log('EXTENSION => remove() => ClarifyBox')
         }
 
         // Remove LimitedState container
@@ -51,7 +51,7 @@ window.onload = () => {
         if (limitedState) {
           limitedState.style.display = 'none';
           limitedState.remove()
-          console.log('EXTENSION => LimitedState removed')
+          console.log('EXTENSION => remove() => LimitedState')
         }
 
         // Remove TicketShelf container
@@ -59,7 +59,7 @@ window.onload = () => {
         if (ticketShelf) {
           ticketShelf.style.display = 'none';
           ticketShelf.remove()
-          console.log('EXTENSION => TicketShelf removed')
+          console.log('EXTENSION => remove() => TicketShelf')
         }
 
         // Remove Secondary => Donation Shelf container
@@ -67,7 +67,7 @@ window.onload = () => {
         if (donationShelf) {
           donationShelf.style.display = 'none';
           donationShelf.remove()
-          console.log('EXTENSION => Donation Shelf removed')
+          console.log('EXTENSION => remove() => Donation Shelf')
         }
 
         // Remove Secondary => Player Ads container
@@ -75,7 +75,7 @@ window.onload = () => {
         if (playerAds) {
           playerAds.style.display = 'none';
           playerAds.remove()
-          console.log('EXTENSION => Player Ads removed')
+          console.log('EXTENSION => remove() => Player Ads')
         }
 
         // Remove Secondary => Offer Module container
@@ -83,7 +83,7 @@ window.onload = () => {
         if (offerModule) {
           offerModule.style.display = 'none';
           offerModule.remove()
-          console.log('EXTENSION => Offer Module removed')
+          console.log('EXTENSION => remove() => Offer Module')
         }
 
         // Remove Secondary => Fulfilled Layout container
@@ -91,7 +91,7 @@ window.onload = () => {
         if (fulfilledLayout) {
           fulfilledLayout.style.display = 'none';
           fulfilledLayout.remove()
-          console.log('EXTENSION => Fulfilled Layout removed')
+          console.log('EXTENSION => remove() => Fulfilled Layout')
         }
 
         // Remove Secondary => Companion container
@@ -99,21 +99,45 @@ window.onload = () => {
         if (adSectionTwo) {
           adSectionTwo.style.display = 'none';
           adSectionTwo.remove();
-          console.log('EXTENSION => Companion removed');
+          console.log('EXTENSION => remove() => Companion');
+        }
+
+        // Remove YouTube Premium Offer
+        const mealBarPromoRenderer = document.getElementById('mealbar-promo-renderer') || null;
+        if (mealBarPromoRenderer) {
+          mealBarPromoRenderer.style.display = 'none';
+          mealBarPromoRenderer.remove()
+          console.log('EXTENSION => remove() => YouTube Premium Offer');
+        }
+
+        // Remove Survey
+        const survey = document.getElementById('survey') || null;
+        if (survey) {
+          survey.style.display = 'none';
+          survey.remove()
+          console.log('EXTENSION => remove() => Survey');
+        }
+
+        // Remove any Dialog
+        const dialog = document.querySelector('[role="dialog"]') || null;
+        if (dialog) {
+          dialog.style.display = 'none';
+          dialog.remove()
+          console.log('EXTENSION => remove() => Dialog');
         }
 
         // Press "Skip ad" button over the video
         const skipAdButton = document.querySelector('.ytp-ad-skip-button') || null;
         if (skipAdButton) {
           skipAdButton.click();
-          console.log('EXTENSION => "Skip Ad" button was clicked');
+          console.log('EXTENSION => click() => "Skip Ad" button');
         }
 
         // Press "Пропустиит" button over the video
         const skipAdButtonModern = document.querySelector('button.ytp-ad-skip-button-modern') || null;
         if (skipAdButtonModern) {
           skipAdButtonModern.click();
-          console.log('EXTENSION => "Пропустити" button was clicked');
+          console.log('EXTENSION => click() => "Пропустити"');
         }
 
         // Skipp Ads video
@@ -122,10 +146,11 @@ window.onload = () => {
           const video = document.querySelector('video') || null;
           if (video && video.duration !== undefined) {
             video.currentTime = video.duration;
-            console.log('EXTENSION => Ad skipped');
+            console.log('EXTENSION => skip => built-in Ad');
           }
         }
 
+        /*
         const dismissButton = document.getElementById('dismiss-button') || null;
         if (dismissButton) {
           dismissButton.click()
@@ -139,19 +164,21 @@ window.onload = () => {
             // TODO: Remove the whole Modal from DOM instead of click()
           }
         }
+        */
 
         // Remove Selling Products button showing in front of the Video
         const buttonOverTheVideo = document.querySelector('.ytp-suggested-action-badge') || null;
         if (buttonOverTheVideo) {
+          buttonOverTheVideo.style.display = 'none';
           buttonOverTheVideo.remove()
-          console.log('EXTENSION => Selling Products button is removed');
+          console.log('EXTENSION => remove() => Selling Products over the Video');
         }
 
         // New Skip button
         const newSkipButton = document.querySelector('.ytp-ad-skip-button-modern') || null;
         if (newSkipButton) {
           newSkipButton.click()
-          console.log('EXTENSION => New Skip button is pressed');
+          console.log('EXTENSION => click() => Modern "Skip" button');
         }
       }, 100);
 
