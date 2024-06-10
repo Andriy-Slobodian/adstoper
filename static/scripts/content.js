@@ -2,6 +2,14 @@ window.onload = () => {
   const { host } = location;
   const modifiedHost = host.replace('www.', '');
 
+  const continuePlayVideo = () => {
+    const continuePlay = document.querySelector('[data-title-no-tooltip="Відтворити"]') || null;
+    if (continuePlay) {
+      continuePlay.click();
+      console.log('EXTENSION => click() => Continue Play the video');
+    }
+  }
+
   // YouTube related logic
   if (host.includes('youtube')) {
     (() => {
@@ -124,27 +132,35 @@ window.onload = () => {
           dialog.style.display = 'none';
           dialog.remove()
           console.log('EXTENSION => remove() => Dialog');
+
+          continuePlayVideo()
         }
 
         const dialogTabIndex = document.querySelector('[role="dialog"][tabindex="-1"]') || null;
         if (dialogTabIndex) {
           dialogTabIndex.style.display = 'none';
           dialogTabIndex.remove()
-          console.log('EXTENSION => remove() => Modern Dialog');
+          console.log('EXTENSION => remove() => Dialog with TabIndex = -1');
+
+          continuePlayVideo()
         }
 
         const dialogModern = document.querySelector('[role="dialog"][modern]') || null;
         if (dialogModern) {
           dialogModern.style.display = 'none';
           dialogModern.remove()
-          console.log('EXTENSION => remove() => Modern Dialog');
+          console.log('EXTENSION => remove() => Dialog Modern');
+
+          continuePlayVideo()
         }
 
         const dialogHost = document.querySelector('[role="dialog"][style-target="host"]') || null;
         if (dialogHost) {
           dialogHost.style.display = 'none';
           dialogHost.remove()
-          console.log('EXTENSION => remove() => Modern Dialog');
+          console.log('EXTENSION => remove() => Dialog Host');
+
+          continuePlayVideo()
         }
 
         // Press "Skip ad" button over the video
@@ -171,35 +187,12 @@ window.onload = () => {
           }
         }
 
-        /*
-        const dismissButton = document.getElementById('dismiss-button') || null;
-        if (dismissButton) {
-          dismissButton.click()
-          console.log('EXTENSION => Premium Account request dismissed');
-
-          const noThanksBtn = dismissButton.querySelector('[aria-label="Ні, дякую"]')
-          if (noThanksBtn) {
-            noThanksBtn.click()
-            console.log('EXTENSION => Premium Account Modal => "Ні, дякую"');
-
-            // TODO: Remove the whole Modal from DOM instead of click()
-          }
-        }
-        */
-
         // Remove Selling Products button showing in front of the Video
         const buttonOverTheVideo = document.querySelector('.ytp-suggested-action-badge') || null;
         if (buttonOverTheVideo) {
           buttonOverTheVideo.style.display = 'none';
           buttonOverTheVideo.remove()
           console.log('EXTENSION => remove() => Selling Products over the Video');
-        }
-
-        // New Skip button
-        const newSkipButton = document.querySelector('.ytp-ad-skip-button-modern') || null;
-        if (newSkipButton) {
-          newSkipButton.click()
-          console.log('EXTENSION => click() => Modern "Skip" button');
         }
       }, 100);
 
