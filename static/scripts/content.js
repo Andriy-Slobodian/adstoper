@@ -126,6 +126,27 @@ window.onload = () => {
           console.log('EXTENSION => remove() => Dialog');
         }
 
+        const dialogTabIndex = document.querySelector('[role="dialog"][tabindex="-1"]') || null;
+        if (dialogTabIndex) {
+          dialogTabIndex.style.display = 'none';
+          dialogTabIndex.remove()
+          console.log('EXTENSION => remove() => Modern Dialog');
+        }
+
+        const dialogModern = document.querySelector('[role="dialog"][modern]') || null;
+        if (dialogModern) {
+          dialogModern.style.display = 'none';
+          dialogModern.remove()
+          console.log('EXTENSION => remove() => Modern Dialog');
+        }
+
+        const dialogHost = document.querySelector('[role="dialog"][style-target="host"]') || null;
+        if (dialogHost) {
+          dialogHost.style.display = 'none';
+          dialogHost.remove()
+          console.log('EXTENSION => remove() => Modern Dialog');
+        }
+
         // Press "Skip ad" button over the video
         const skipAdButton = document.querySelector('.ytp-ad-skip-button') || null;
         if (skipAdButton) {
