@@ -154,6 +154,13 @@ window.onload = () => {
           continuePlayVideo()
         }
 
+        const secondaryAdTopSection = document.querySelector('#secondary-inner #related #items #fulfilled-layout') || null;
+        if (secondaryAdTopSection) {
+          secondaryAdTopSection.style.display = 'none';
+          secondaryAdTopSection.remove()
+          console.log('EXTENSION => remove() => Secondary Ad Top-Section');
+        }
+
         const dialogHost = document.querySelector('[role="dialog"][style-target="host"]') || null;
         if (dialogHost) {
           dialogHost.style.display = 'none';
