@@ -132,8 +132,6 @@ window.onload = () => {
           dialog.style.display = 'none';
           dialog.remove()
           console.log('EXTENSION => remove() => Dialog');
-
-          continuePlayVideo()
         }
 
         const dialogTabIndex = document.querySelector('[role="dialog"][tabindex="-1"]') || null;
@@ -141,8 +139,6 @@ window.onload = () => {
           dialogTabIndex.style.display = 'none';
           dialogTabIndex.remove()
           console.log('EXTENSION => remove() => Dialog with TabIndex = -1');
-
-          continuePlayVideo()
         }
 
         const dialogModern = document.querySelector('[role="dialog"][modern]') || null;
@@ -150,8 +146,6 @@ window.onload = () => {
           dialogModern.style.display = 'none';
           dialogModern.remove()
           console.log('EXTENSION => remove() => Dialog Modern');
-
-          continuePlayVideo()
         }
 
         const secondaryAdTopSection = document.querySelector('#secondary-inner #related #items #fulfilled-layout') || null;
@@ -166,8 +160,6 @@ window.onload = () => {
           dialogHost.style.display = 'none';
           dialogHost.remove()
           console.log('EXTENSION => remove() => Dialog Host');
-
-          continuePlayVideo()
         }
 
         // Press "Skip ad" button over the video
@@ -202,6 +194,9 @@ window.onload = () => {
           console.log('EXTENSION => remove() => Selling Products over the Video');
         }
       }, 100);
+
+      // Continue to play the video in case it was paused
+      continuePlayVideo()
 
       return function () {
         clearTimeout(timeout);
