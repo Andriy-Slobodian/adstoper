@@ -14,92 +14,100 @@ window.onload = () => {
   if (host.includes('youtube')) {
     (() => {
       const timeout = setInterval(() => {
+        // Remove Panels
+        const panels = document.querySelector('#secondary #panels') || null;
+        if (panels) {
+          panels.style.display = 'none';
+          panels.remove();
+          console.log('EXTENSION => remove() => Panels');
+        }
+
         // Remove Ticker container
         const ticker = document.body.querySelector('#content #masthead-container #ticker') || null;
         if (ticker) {
           ticker.style.display = 'none';
-          ticker.remove()
-          console.log('EXTENSION => remove() => Ticker')
+          ticker.remove();
+          console.log('EXTENSION => remove() => Ticker');
         }
 
         // Remove Interstitial container
         const interstitial = document.body.querySelector('#content #masthead-container #interstitial') || null;
         if (interstitial) {
           interstitial.style.display = 'none';
-          interstitial.remove()
-          console.log('EXTENSION => remove() => Interstitial')
+          interstitial.remove();
+          console.log('EXTENSION => remove() => Interstitial');
         }
 
         // Remove Alerts container
         const alerts = document.getElementById('alerts') || null;
         if (alerts) {
           alerts.style.display = 'none';
-          alerts.remove()
-          console.log('EXTENSION => remove() => Alerts')
+          alerts.remove();
+          console.log('EXTENSION => remove() => Alerts');
         }
 
         // Remove Messages container
         const messages = document.getElementById('messages') || null;
         if (messages) {
           messages.style.display = 'none';
-          messages.remove()
-          console.log('EXTENSION => remove() => Messages')
+          messages.remove();
+          console.log('EXTENSION => remove() => Messages');
         }
 
         // Remove ClarifyBox container
         const clarifyBox = document.getElementById('clarify-box') || null;
         if (clarifyBox) {
           clarifyBox.style.display = 'none';
-          clarifyBox.remove()
-          console.log('EXTENSION => remove() => ClarifyBox')
+          clarifyBox.remove();
+          console.log('EXTENSION => remove() => ClarifyBox');
         }
 
         // Remove LimitedState container
         const limitedState = document.getElementById('limited-state') || null;
         if (limitedState) {
           limitedState.style.display = 'none';
-          limitedState.remove()
-          console.log('EXTENSION => remove() => LimitedState')
+          limitedState.remove();
+          console.log('EXTENSION => remove() => LimitedState');
         }
 
         // Remove TicketShelf container
         const ticketShelf = document.getElementById('ticket-shelf') || null;
         if (ticketShelf) {
           ticketShelf.style.display = 'none';
-          ticketShelf.remove()
-          console.log('EXTENSION => remove() => TicketShelf')
+          ticketShelf.remove();
+          console.log('EXTENSION => remove() => TicketShelf');
         }
 
         // Remove Secondary => Donation Shelf container
         const donationShelf = document.getElementById('donation-shelf') || null;
         if (donationShelf) {
           donationShelf.style.display = 'none';
-          donationShelf.remove()
-          console.log('EXTENSION => remove() => Donation Shelf')
+          donationShelf.remove();
+          console.log('EXTENSION => remove() => Donation Shelf');
         }
 
         // Remove Secondary => Player Ads container
         const playerAds = document.getElementById('player-ads') || null;
         if (playerAds) {
           playerAds.style.display = 'none';
-          playerAds.remove()
-          console.log('EXTENSION => remove() => Player Ads')
+          playerAds.remove();
+          console.log('EXTENSION => remove() => Player Ads');
         }
 
         // Remove Secondary => Offer Module container
         const offerModule = document.getElementById('offer-module') || null;
         if (offerModule) {
           offerModule.style.display = 'none';
-          offerModule.remove()
-          console.log('EXTENSION => remove() => Offer Module')
+          offerModule.remove();
+          console.log('EXTENSION => remove() => Offer Module');
         }
 
         // Remove Secondary => Fulfilled Layout container
         const fulfilledLayout = document.querySelector('#related #items #contents #fulfilled-layout') || null;
         if (fulfilledLayout) {
           fulfilledLayout.style.display = 'none';
-          fulfilledLayout.remove()
-          console.log('EXTENSION => remove() => Fulfilled Layout')
+          fulfilledLayout.remove();
+          console.log('EXTENSION => remove() => Fulfilled Layout');
         }
 
         // Remove Secondary => Companion container
@@ -114,7 +122,7 @@ window.onload = () => {
         const mealBarPromoRenderer = document.getElementById('mealbar-promo-renderer') || null;
         if (mealBarPromoRenderer) {
           mealBarPromoRenderer.style.display = 'none';
-          mealBarPromoRenderer.remove()
+          mealBarPromoRenderer.remove();
           console.log('EXTENSION => remove() => YouTube Premium Offer');
         }
 
@@ -122,7 +130,7 @@ window.onload = () => {
         const survey = document.getElementById('survey') || null;
         if (survey) {
           survey.style.display = 'none';
-          survey.remove()
+          survey.remove();
           console.log('EXTENSION => remove() => Survey');
         }
 
@@ -130,35 +138,35 @@ window.onload = () => {
         const dialog = document.querySelector('[role="dialog"]') || null;
         if (dialog) {
           dialog.style.display = 'none';
-          dialog.remove()
+          dialog.remove();
           console.log('EXTENSION => remove() => Dialog');
         }
 
         const dialogTabIndex = document.querySelector('[role="dialog"][tabindex="-1"]') || null;
         if (dialogTabIndex) {
           dialogTabIndex.style.display = 'none';
-          dialogTabIndex.remove()
+          dialogTabIndex.remove();
           console.log('EXTENSION => remove() => Dialog with TabIndex = -1');
         }
 
         const dialogModern = document.querySelector('[role="dialog"][modern]') || null;
         if (dialogModern) {
           dialogModern.style.display = 'none';
-          dialogModern.remove()
+          dialogModern.remove();
           console.log('EXTENSION => remove() => Dialog Modern');
         }
 
         const secondaryAdTopSection = document.querySelector('#secondary-inner #related #items #fulfilled-layout') || null;
         if (secondaryAdTopSection) {
           secondaryAdTopSection.style.display = 'none';
-          secondaryAdTopSection.remove()
+          secondaryAdTopSection.remove();
           console.log('EXTENSION => remove() => Secondary Ad Top-Section');
         }
 
         const dialogHost = document.querySelector('[role="dialog"][style-target="host"]') || null;
         if (dialogHost) {
           dialogHost.style.display = 'none';
-          dialogHost.remove()
+          dialogHost.remove();
           console.log('EXTENSION => remove() => Dialog Host');
         }
 
@@ -180,7 +188,7 @@ window.onload = () => {
         const ad = document.querySelector('.ad-showing') || null;
         if (ad) {
           const video = document.querySelector('video') || null;
-          if (video && video.duration !== undefined) {
+          if (video && video.duration !== undefined && 'currentTime' in video) {
             video.currentTime = video.duration;
             console.log('EXTENSION => skip => built-in Ad');
           }
@@ -190,7 +198,7 @@ window.onload = () => {
         const buttonOverTheVideo = document.querySelector('.ytp-suggested-action-badge') || null;
         if (buttonOverTheVideo) {
           buttonOverTheVideo.style.display = 'none';
-          buttonOverTheVideo.remove()
+          buttonOverTheVideo.remove();
           console.log('EXTENSION => remove() => Selling Products over the Video');
         }
       }, 100);
