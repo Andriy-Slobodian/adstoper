@@ -184,6 +184,13 @@ window.onload = () => {
           console.log('EXTENSION => click() => "Пропустити"');
         }
 
+        // Press "Пропустити" - another implementation
+        const skipAdButtonModern2 = document.querySelector('.ytp-ad-skip-button-modern.ytp-button') || null;
+        if (skipAdButtonModern2) {
+          skipAdButtonModern.click();
+          console.log('EXTENSION => click() => "Пропустити" - 2nd variant');
+        }
+
         // Skipp Ads video
         const ad = document.querySelector('.ad-showing') || null;
         if (ad) {
