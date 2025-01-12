@@ -1,3 +1,20 @@
+function isElementVisible(element = null) {
+  if (!element || !(element instanceof Element)) {
+    return false;
+  }
+
+  const rect = element.getBoundingClientRect();
+  const style = window.getComputedStyle(element);
+
+  const isInViewport = rect.top >= 0 && rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+
+  const isStyleVisible = style.display !== "none" && style.visibility !== "hidden" && style.opacity !== "0";
+
+  return isInViewport && isStyleVisible;
+}
+
 window.onload = () => {
   const { host } = location;
   const modifiedHost = host.replace('www.', '');
@@ -225,14 +242,16 @@ window.onload = () => {
           console.log('EXTENSION => remove() => Selling Products over the Video');
         }
 
-        // YouTube blocks the Video translation by warning message
-        const videoBlocker = document.querySelector('.yt-spec-button-shape-next') || null;
-        if (videoBlocker) {
-          // TODO: need to decide what to do in this case
-
-          // videoBlocker.click();
-          // window.location.href = window.location.href + '?cache=' + new Date().getTime();
-          console.log('EXTENSION => reload() => TODO: .... Reload the page?');
+        // YouTube blocks the Video by showing the Warning Message
+        const blockTitle = document.querySelector('#container #title') || null;
+        const unlockButton = document.querySelectorAll('#container #buttons button.yt-spec-button-shape-next') || null;
+        const premiumLink = document.querySelectorAll('#container #buttons a.yt-spec-button-shape-next') || null;
+        const isBlockTitleVisible = isElementVisible(blockTitle);
+        const isUnlockButtonVisible = isElementVisible(unlockButton);
+        const isPremiumButtonVisible = isElementVisible(premiumLink);
+        if (isBlockTitleVisible && isUnlockButtonVisible && isPremiumButtonVisible) {
+          console.log('EXTENSION => reload() => Reload the page due to a blocked Video');
+          window.location.href = window.location.href + '?cache=' + new Date().getTime();
         }
       }, 100);
 

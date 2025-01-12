@@ -18,7 +18,15 @@
         "stripecdn.com",
         "google.com",
         "adobe.com",
-        "jetbrains.com"
+        "jetbrains.com",
+        "x.com",
+        "nodepay.ai",
+        "getgrass.io",
+        "solscan.io",
+        "bybit.com",
+        "binance.com",
+        "okx.com",
+        "bitget.com"
       ],
       "resourceTypes": [
         "sub_frame"
