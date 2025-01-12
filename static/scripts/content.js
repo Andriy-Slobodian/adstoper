@@ -14,8 +14,45 @@ window.onload = () => {
   if (host.includes('youtube')) {
     (() => {
       const timeout = setInterval(() => {
+        // Press "Skip ad" button over the video
+        const skipAdButton = document.querySelector('.ytp-ad-skip-button') || null;
+        if (skipAdButton) {
+          skipAdButton.click();
+          console.log('EXTENSION => click() => "Skip Ad" button');
+        }
+
+        // Press "Пропустиит" button over the video
+        const skipAdButtonModern = document.querySelector('button.ytp-ad-skip-button-modern') || null;
+        if (skipAdButtonModern) {
+          skipAdButtonModern.click();
+          console.log('EXTENSION => click() => "Пропустити"');
+        }
+
+        // Press "Пропустити" - another implementation
+        const skipAdButtonModern2 = document.querySelector('.ytp-ad-skip-button-modern.ytp-button') || null;
+        if (skipAdButtonModern2) {
+          skipAdButtonModern.click();
+          console.log('EXTENSION => click() => "Пропустити" - 2nd variant');
+        }
+
+        // Remove Rendering content
+        const renderingContent = document.querySelector('#rendering-content') || null;
+        if (renderingContent) {
+          renderingContent.style.display = 'none';
+          renderingContent.remove();
+          console.log('EXTENSION => remove() => Rendering Content');
+        }
+
+        // Remove Items that are sale
+        const itemList = document.querySelector('#item-list') || null;
+        if (itemList) {
+          itemList.style.display = 'none';
+          itemList.remove();
+          console.log('EXTENSION => remove() => Item List for sale');
+        }
+
         // Remove Panels
-        const panels = document.querySelector('#secondary #panels') || null;
+        const panels = document.querySelector('#panels') || null;
         if (panels) {
           panels.style.display = 'none';
           panels.remove();
@@ -170,27 +207,6 @@ window.onload = () => {
           console.log('EXTENSION => remove() => Dialog Host');
         }
 
-        // Press "Skip ad" button over the video
-        const skipAdButton = document.querySelector('.ytp-ad-skip-button') || null;
-        if (skipAdButton) {
-          skipAdButton.click();
-          console.log('EXTENSION => click() => "Skip Ad" button');
-        }
-
-        // Press "Пропустиит" button over the video
-        const skipAdButtonModern = document.querySelector('button.ytp-ad-skip-button-modern') || null;
-        if (skipAdButtonModern) {
-          skipAdButtonModern.click();
-          console.log('EXTENSION => click() => "Пропустити"');
-        }
-
-        // Press "Пропустити" - another implementation
-        const skipAdButtonModern2 = document.querySelector('.ytp-ad-skip-button-modern.ytp-button') || null;
-        if (skipAdButtonModern2) {
-          skipAdButtonModern.click();
-          console.log('EXTENSION => click() => "Пропустити" - 2nd variant');
-        }
-
         // Skipp Ads video
         const ad = document.querySelector('.ad-showing') || null;
         if (ad) {
@@ -207,6 +223,16 @@ window.onload = () => {
           buttonOverTheVideo.style.display = 'none';
           buttonOverTheVideo.remove();
           console.log('EXTENSION => remove() => Selling Products over the Video');
+        }
+
+        // YouTube blocks the Video translation by warning message
+        const videoBlocker = document.querySelector('.yt-spec-button-shape-next') || null;
+        if (videoBlocker) {
+          // TODO: need to decide what to do in this case
+
+          // videoBlocker.click();
+          // window.location.href = window.location.href + '?cache=' + new Date().getTime();
+          console.log('EXTENSION => reload() => TODO: .... Reload the page?');
         }
       }, 100);
 
