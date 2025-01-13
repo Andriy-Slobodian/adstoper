@@ -41,6 +41,15 @@ function saveVideoTime() {
 window.onload = () => {
   const { host } = location;
   const modifiedHost = host.replace('www.', '');
+  let isUserClick = false;
+
+  document.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    if (event.isTrusted) {
+      isUserClick = !isUserClick;
+    }
+  });
 
   const continuePlayVideo = () => {
     const continuePlay = document.querySelector('[data-title-no-tooltip="Відтворити"]') || null;
@@ -70,7 +79,7 @@ window.onload = () => {
           }
 
           // Press "Play" if the Player is paused
-          if (player.paused) {
+          if (player.paused && !isUserClick) {
             player.play();
             console.log('EXTENSION => RESTORE_PLAY => Press "Play" button on a Player', player.currentTime);
           }
@@ -298,8 +307,8 @@ window.onload = () => {
         if (isBlockTitleVisible && isBlockTitleText && isUnlockButtonVisible && isPremiumButtonVisible) {
           console.log('EXTENSION => RELOAD => Reload the page due to a blocked Video');
 
-          window.location.href = window.location.href;
-          location.reload();
+          window.location.reload();
+          window.location.href = window.location.href + '&cache=' + new Date().getTime();
         }
       }, 100);
 
