@@ -15,6 +15,29 @@ function isElementVisible(element = null) {
   return isInViewport && isStyleVisible;
 }
 
+// Function to get the video player
+function getYouTubePlayer() {
+  return document.querySelector('video.video-stream') || null;
+}
+
+// Save the current playback time in storage
+function saveVideoTime() {
+  const player = getYouTubePlayer();
+  const isPlayerVisible = isElementVisible(player);
+
+  if (isPlayerVisible) {
+    const currentTime = player.currentTime;
+
+    if (currentTime > 0) {
+      localStorage.setItem('VIDEO_CURRENT_TIME', player.currentTime);
+      // localStorage.setItem('VIDEO_DURATION', player.duration);
+
+      // console.log('EXTENSION => saveVideoTime() => VIDEO_CURRENT_TIME:', player.currentTime);
+      // console.log('EXTENSION => saveVideoTime() => VIDEO_DURATION:', player.duration);
+    }
+  }
+}
+
 window.onload = () => {
   const { host } = location;
   const modifiedHost = host.replace('www.', '');
@@ -30,7 +53,29 @@ window.onload = () => {
   // YouTube related logic
   if (host.includes('youtube')) {
     (() => {
+      // Save Player time to Local Storage
+      const videoTimeInterval = setInterval(() => saveVideoTime(), 1000);
+
       const timeout = setInterval(() => {
+        // Restore Player playing position from Local Storage
+        const player = getYouTubePlayer();
+        const isPlayerVisible = isElementVisible(player);
+        if (isPlayerVisible) {
+          const savedPlayerTime = Number(localStorage.getItem('VIDEO_CURRENT_TIME'));
+          const currentPlayerTime = Number(player.currentTime);
+          if (savedPlayerTime && currentPlayerTime < savedPlayerTime) {
+            player.currentTime = savedPlayerTime;
+
+            console.log('EXTENSION => RESTORE_PLAY => Restore video playing from time', player.currentTime);
+          }
+
+          // Press "Play" if the Player is paused
+          if (player.paused) {
+            player.play();
+            console.log('EXTENSION => RESTORE_PLAY => Press "Play" button on a Player', player.currentTime);
+          }
+        }
+
         // Press "Skip ad" button over the video
         const skipAdButton = document.querySelector('.ytp-ad-skip-button') || null;
         if (skipAdButton) {
@@ -244,14 +289,17 @@ window.onload = () => {
 
         // YouTube blocks the Video by showing the Warning Message
         const blockTitle = document.querySelector('#container #title') || null;
-        const unlockButton = document.querySelectorAll('#container #buttons button.yt-spec-button-shape-next') || null;
-        const premiumLink = document.querySelectorAll('#container #buttons a.yt-spec-button-shape-next') || null;
+        const unlockButton = document.querySelector('#container #buttons button.yt-spec-button-shape-next[aria-label="Дозволити показувати рекламу на YouTube"]') || null;
+        const premiumLink = document.querySelector('#container #buttons a.yt-spec-button-shape-next[aria-label="Спробувати YouTube Premium"]') || null;
         const isBlockTitleVisible = isElementVisible(blockTitle);
         const isUnlockButtonVisible = isElementVisible(unlockButton);
         const isPremiumButtonVisible = isElementVisible(premiumLink);
-        if (isBlockTitleVisible && isUnlockButtonVisible && isPremiumButtonVisible) {
-          console.log('EXTENSION => reload() => Reload the page due to a blocked Video');
-          window.location.href = window.location.href + '?cache=' + new Date().getTime();
+        const isBlockTitleText = blockTitle?.innerText?.includes('блокування реклами') || false;
+        if (isBlockTitleVisible && isBlockTitleText && isUnlockButtonVisible && isPremiumButtonVisible) {
+          console.log('EXTENSION => RELOAD => Reload the page due to a blocked Video');
+
+          window.location.href = window.location.href;
+          location.reload();
         }
       }, 100);
 
@@ -259,7 +307,8 @@ window.onload = () => {
       continuePlayVideo()
 
       return function () {
-        clearTimeout(timeout);
+        clearInterval(timeout);
+        clearInterval(videoTimeInterval);
       };
     })();
   }
