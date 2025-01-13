@@ -41,13 +41,21 @@ function saveVideoTime() {
 window.onload = () => {
   const { host } = location;
   const modifiedHost = host.replace('www.', '');
-  let isUserClick = false;
+  let isUserAction = false;
 
   document.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (event.isTrusted) {
-      isUserClick = !isUserClick;
+      isUserAction = !isUserAction;
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    event.preventDefault();
+
+    if (event.code === 'Space') {
+      isUserAction = !isUserAction;
     }
   });
 
@@ -79,7 +87,7 @@ window.onload = () => {
           }
 
           // Press "Play" if the Player is paused
-          if (player.paused && !isUserClick) {
+          if (player.paused && !isUserAction) {
             player.play();
             console.log('EXTENSION => RESTORE_PLAY => Press "Play" button on a Player', player.currentTime);
           }
