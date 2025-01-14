@@ -20,7 +20,7 @@ function getYouTubePlayer() {
   return document.querySelector('video.video-stream') || null;
 }
 
-// Save the current playback time in storage
+// Save the current playback time to local storage
 function saveVideoTime() {
   const player = getYouTubePlayer();
   const isPlayerVisible = isElementVisible(player);
@@ -30,42 +30,44 @@ function saveVideoTime() {
 
     if (currentTime > 0) {
       localStorage.setItem('VIDEO_CURRENT_TIME', player.currentTime);
-      // localStorage.setItem('VIDEO_DURATION', player.duration);
-
-      // console.log('EXTENSION => saveVideoTime() => VIDEO_CURRENT_TIME:', player.currentTime);
-      // console.log('EXTENSION => saveVideoTime() => VIDEO_DURATION:', player.duration);
     }
   }
 }
 
 window.onload = () => {
-  const { host } = location;
+  const { host, search } = location;
   const modifiedHost = host.replace('www.', '');
+  const player = getYouTubePlayer();
+  const isPlayerVisible = isElementVisible(player);
   let isUserAction = false;
 
+  // Each time the URL is changed we reset the current video position
+  window.addEventListener("popstate", () => {
+    localStorage.setItem('VIDEO_CURRENT_TIME', 0);
+    console.log('EXTENSION => popstate => The URL is changed');
+  });
+
+  // User click
   document.addEventListener('click', (event) => {
-    event.preventDefault();
-
     if (event.isTrusted) {
+      event.preventDefault();
+
       isUserAction = !isUserAction;
+
+      console.log('EXTENSION => click => User click');
     }
   });
 
+  // User key press
   document.addEventListener('keydown', (event) => {
-    event.preventDefault();
-
     if (event.code === 'Space') {
+      event.preventDefault();
+
       isUserAction = !isUserAction;
+
+      console.log('EXTENSION => keydown => User presses "Space" key');
     }
   });
-
-  const continuePlayVideo = () => {
-    const continuePlay = document.querySelector('[data-title-no-tooltip="Відтворити"]') || null;
-    if (continuePlay) {
-      continuePlay.click();
-      console.log('EXTENSION => click() => Continue Play the video');
-    }
-  }
 
   // YouTube related logic
   if (host.includes('youtube')) {
@@ -75,8 +77,6 @@ window.onload = () => {
 
       const timeout = setInterval(() => {
         // Restore Player playing position from Local Storage
-        const player = getYouTubePlayer();
-        const isPlayerVisible = isElementVisible(player);
         if (isPlayerVisible) {
           const savedPlayerTime = Number(localStorage.getItem('VIDEO_CURRENT_TIME'));
           const currentPlayerTime = Number(player.currentTime);
@@ -304,6 +304,13 @@ window.onload = () => {
           console.log('EXTENSION => remove() => Selling Products over the Video');
         }
 
+        // Continue to play the video in case it was paused
+        const continuePlay = document.querySelector('[data-title-no-tooltip="Відтворити"]') || null;
+        if (continuePlay && !isUserAction) {
+          continuePlay.click();
+          console.log('EXTENSION => click() => Continue Play the video');
+        }
+
         // YouTube blocks the Video by showing the Warning Message
         const blockTitle = document.querySelector('#container #title') || null;
         const unlockButton = document.querySelector('#container #buttons button.yt-spec-button-shape-next[aria-label="Дозволити показувати рекламу на YouTube"]') || null;
@@ -319,9 +326,6 @@ window.onload = () => {
           window.location.href = window.location.href + '&cache=' + new Date().getTime();
         }
       }, 100);
-
-      // Continue to play the video in case it was paused
-      continuePlayVideo()
 
       return function () {
         clearInterval(timeout);
